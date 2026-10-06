@@ -181,7 +181,6 @@ int main(void){
   f2:	20 83       	st	Z, r18
     
     // Initialization for Timer Interrupt
-    // Clock prescaler set to 1/64 (CS02 = 1, CS01 = 0, CS00 = 0)
     TCCR0 = (1 << CS02);
   f4:	83 e5       	ldi	r24, 0x53	; 83
   f6:	90 e0       	ldi	r25, 0x00	; 0
@@ -229,7 +228,6 @@ int main(void){
  13c:	20 83       	st	Z, r18
     
     // Interrupt Enable Block
-    // Configure INT0 for falling edge trigger (ISC01 = 1, ISC00 = 0)
     EICRA = (1 << ISC01);
  13e:	8a e6       	ldi	r24, 0x6A	; 106
  140:	90 e0       	ldi	r25, 0x00	; 0

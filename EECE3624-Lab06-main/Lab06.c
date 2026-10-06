@@ -36,7 +36,7 @@ volatile unsigned int Tick = 0;               // Incremented every 1ms in Timer0
 volatile PatternMode Mode = MODE_LOW_TO_HIGH; // Current pattern mode
 volatile unsigned char modeChanged = 0;        // Flag set when joystick button updates Mode
 
-// Function prototypes for pattern execution
+// Function defaults for pattern execution
 void update_low_to_high(void);
 void update_high_to_low(void);
 void update_back_and_forth(void);
@@ -53,7 +53,6 @@ int main(void){
     LEDS = 0xFF;  // Set PORTA pins to high (i.e., OFF for active-low LEDs)
     
     // Initialization for Timer Interrupt
-    // Clock prescaler set to 1/64 (CS02 = 1, CS01 = 0, CS00 = 0)
     TCCR0 = (1 << CS02);
     TCNT0 = TCNT0_COUNT_SET;
     TIMSK |= (1 << TOIE0); // Enable Timer0 overflow interrupt
@@ -64,7 +63,6 @@ int main(void){
     PORTD |= (1 << PORTD0); // Enable internal pull-up on PD0
     
     // Interrupt Enable Block
-    // Configure INT0 for falling edge trigger (ISC01 = 1, ISC00 = 0)
     EICRA = (1 << ISC01);
     EIMSK = (1 << INT0);    // Enable External Interrupt 0
     
