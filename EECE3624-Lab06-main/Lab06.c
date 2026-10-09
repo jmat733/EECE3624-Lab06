@@ -23,14 +23,14 @@
 
 // Four LED patterns required by the lab
 typedef enum {
-    MODE_LOW_TO_HIGH = 0,    // Pattern 1: A0 to A7
-    MODE_HIGH_TO_LOW = 1,    // Pattern 2: A7 to A0
-    MODE_BACK_AND_FORTH = 2, // Pattern 3: A0 to A7 to A0
-    MODE_CUSTOM = 3          // Pattern 4: Custom Pattern
+    MODE_LOW_TO_HIGH = 0,    // A0 to A7
+    MODE_HIGH_TO_LOW = 1,    // A7 to A0
+    MODE_BACK_AND_FORTH = 2, // A0 to A7 to A0
+    MODE_CUSTOM = 3          // Bounce off middle
 } PatternMode;
 
-// Global variables for communication between ISRs and main
-const unsigned char TCNT0_COUNT_SET = 0x8E; // Count for 1ms loop (Provided by Prof Hutton)
+// Global variables 
+const unsigned char TCNT0_COUNT_SET = 0x8E; // Count for 1ms loop 
 
 volatile unsigned int Tick = 0;               // Incremented every 1ms in Timer0 ISR
 volatile PatternMode Mode = MODE_LOW_TO_HIGH; // Current pattern mode
@@ -50,7 +50,7 @@ int main(void){
     
     // Initialization for LEDs
     DDRA = 0xFF;  // Set the Direction for all PORTA pins to be outputs
-    LEDS = 0xFF;  // Set PORTA pins to high (i.e., OFF for active-low LEDs)
+    LEDS = 0xFF;  // Set PORTA pins to high 
     
     // Initialization for Timer Interrupt
     TCCR0 = (1 << CS02);
@@ -69,7 +69,7 @@ int main(void){
     // Enable Global Interrupts
     sei();
     
-    // Main Game Loop
+
     while (1) {
         // Reset state if joystick pressed to clear output immediately
         if (modeChanged) {
@@ -175,7 +175,7 @@ void update_back_and_forth(void) {
     }
 }
 
-// Pattern 4: Custom Pattern (Center In/Out Bounce)
+// Pattern 4: bounce off middle
 void update_custom_pattern(void) {
     static unsigned char step = 0;
     const unsigned char patterns[] = {
